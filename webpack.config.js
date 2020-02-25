@@ -7,7 +7,7 @@ const src = path.resolve(__dirname, 'src');
 
 module.exports = {
   entry: { 
-    index:[`${src}/js/index.js`],
+    index:[`${src}/js/index.js`, `${src}/css/index.css` ],
   },
   devtool: 'inline-source-map',
   module: {
@@ -16,6 +16,10 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -26,15 +30,14 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
   },
-  devServer: {
-    
+  devServer: {    
     port: 9000
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename:'index.html',          
       template: './src/html/index.html',
-      chunks:['home'] ,
+      chunks:['index'] ,
       inlineSource: '.(js|css)$',     
       minify:{
         collapseWhitespace: true,
