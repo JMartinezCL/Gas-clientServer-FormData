@@ -4,12 +4,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const src = path.resolve(__dirname, 'src');
+const dist = path.resolve(__dirname, 'dist');
 
 module.exports = {
+  mode: 'production',
   entry: { 
     index:[`${src}/js/index.js`, `${src}/css/index.css` ],
-  },
-  devtool: 'inline-source-map',
+  },  
   module: {
     rules: [
       {
@@ -26,16 +27,12 @@ module.exports = {
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ],
   },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
-  },
   devServer: {    
     port: 9000
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename:'index.html',          
+      filename:`${dist}/index.html`,
       template: './src/html/index.html',
       chunks:['index'] ,
       inlineSource: '.(js|css)$',     
