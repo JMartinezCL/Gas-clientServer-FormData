@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, {});
+    var instances = M.Sidenav.init(elems, {});   
   });
 
-function doSomething(){  
+function getData(){  
   console.log("works!");
   let first_name = document.getElementById('first_name').value;
   let last_name = document.getElementById('last_name').value;
@@ -15,5 +15,33 @@ function doSomething(){
   google.script.run.getFormData(obj);
 }
 
+
 document.getElementById('btn-send')
-  .addEventListener('click', doSomething);
+  .addEventListener('click', getData);
+
+function  dataTable(data){
+
+  let user = JSON.parse(data); 
+  let table = document.getElementById('body-table');
+  table.innerHTML = "";  
+  let index = 0;
+
+  user.forEach(element => {   
+    if(index > 0){
+      const tr = document.createElement('tr'); 
+      tr.innerHTML=
+      '<td>'+element.first_name+'</td>'+
+      '<td>'+element.last_name+'</td>'+
+      '<td>'+element.address+'</td>'+
+      '<td>'+element.email+'</td>';
+      table.appendChild(tr);
+    }    
+    index++;
+  });
+}
+
+document.getElementById('btn-load')
+  .addEventListener('click', ()=>{
+    google.script.run.withSuccessHandler(dataTable)
+      .dataSheet();
+  });
