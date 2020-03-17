@@ -9,7 +9,7 @@ const dist = path.resolve(__dirname, 'dist');
 module.exports = {
   mode: 'production',
   entry: { 
-    index:[`${src}/js/index.js`, `${src}/css/index.css` ],
+    index:[`${src}/js/index.js`, `${src}/js/scrollReveal.js`, `${src}/css/index.css`  ],
   },  
   module: {
     rules: [
