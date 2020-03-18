@@ -1,12 +1,13 @@
-function getFormData(){
-    
-
+function getFormData(data: any){
+  Logger.log(data.first_name);
+  let sheet: any = SpreadsheetApp.getActiveSheet();
+  sheet.appendRow([data.first_name, data.last_name, data.address, data.email, data.psw]);  
 }
 
 function dataSheet(){
-    let sheet = SpreadsheetApp.getActiveSheet();
+    let sheet: any = SpreadsheetApp.getActiveSheet();
     let data: any = sheet.getDataRange().getValues();
-    let dataSheet: any ={};  
+    let dataSheet: any =[];  
   
     for (var i = 0; i < data.length; i++) {
       Logger.log('Product name: ' + data[i][0]);
