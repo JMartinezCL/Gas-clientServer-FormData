@@ -2,9 +2,11 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const src = path.resolve(__dirname, 'src');
 const dist = path.resolve(__dirname, 'dist');
+const deployGas = path.resolve(__dirname, 'deployGas');
 
 module.exports = {
   mode: 'production',
@@ -47,5 +49,11 @@ module.exports = {
   }),
     new HtmlWebpackInlineSourcePlugin(),
     new CleanWebpackPlugin(),
+    new CopyPlugin([
+      {
+        from: `${dist}/index.html`,
+        to: deployGas,
+      }
+    ]),
   ]
 };
