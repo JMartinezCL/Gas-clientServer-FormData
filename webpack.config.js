@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 const src = path.resolve(__dirname, 'src');
 const dist = path.resolve(__dirname, 'dist');
@@ -47,13 +48,18 @@ module.exports = {
         useShortDoctype: true
     }        
   }),
-    new HtmlWebpackInlineSourcePlugin(),
     new CleanWebpackPlugin(),
-    new CopyPlugin([
-      {
-        from: `${dist}/index.html`,
-        to: deployGas,
-      }
-    ]),
+    new HtmlWebpackInlineSourcePlugin(),    
+    new FileManagerPlugin({
+      onEnd: [{
+          copy: [
+              {
+                  source: `${dist}/index.html`,
+                  destination: `${deployGas}/index.html`
+              }
+          ]
+      }]
+  }),
+  
   ]
 };

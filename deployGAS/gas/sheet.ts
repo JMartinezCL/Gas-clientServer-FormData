@@ -9,9 +9,7 @@ function dataSheet(){
     let data: any = sheet.getDataRange().getValues();
     let dataSheet: any =[];  
   
-    for (var i = 0; i < data.length; i++) {
-      Logger.log('Product name: ' + data[i][0]);
-      Logger.log('Product number: ' + data[i][1]);
+    for (var i = 0; i < data.length; i++) {      
       dataSheet.push({
         "first_name":data[i][0],
         "last_name":data[i][1],
@@ -19,8 +17,7 @@ function dataSheet(){
         "email":data[i][3]
       });
     }
-    let dataJson: string = JSON.stringify(dataSheet);
-    let dataParse: object = JSON.parse(dataJson);
-    
-    return dataParse;
+    let dataJson: string = JSON.stringify(dataSheet);    
+    Logger.log(dataJson);
+    return dataJson;
   }
