@@ -3,6 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var instances = M.Sidenav.init(elems, {});   
   });
 
+function resetForm(){
+    document.getElementById('first_name').value = "";
+    document.getElementById('last_name').value = "";
+    document.getElementById('address').value = "";
+    document.getElementById('email').value = "";
+    document.getElementById('password').value = "";
+  }
+
 function getData(){  
   console.log("works!");
   let first_name = document.getElementById('first_name').value;
@@ -12,7 +20,9 @@ function getData(){
   let psw = document.getElementById('password').value;
   let data = '{"first_name": "'+first_name+'", "last_name":"'+last_name+'", "address":"'+address+'", "email":"'+email+'", "psw":"'+psw+'"}';
   let obj = JSON.parse(data);
+  resetForm();
   google.script.run.getFormData(obj);
+
 }
 
 
